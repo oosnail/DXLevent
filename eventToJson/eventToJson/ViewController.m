@@ -21,9 +21,19 @@
     
     //对excel数据进行修改
     NSMutableDictionary*newDic = [[NSMutableDictionary alloc] init];
+    
     for (NSDictionary *dic in list){
-        if([dic objectForKey:@"event"]){
-            [newDic setObject:dic forKey:[dic objectForKey:@"event"]];
+        NSMutableDictionary *tempdic = [[NSMutableDictionary alloc]init];
+        for (NSString* key  in dic.allKeys){
+            NSString *value  = [dic objectForKey:key];
+            value = [value stringByReplacingOccurrencesOfString:@" " withString:@""];
+            [tempdic setObject:value forKey:key];
+        }
+        
+        if([tempdic objectForKey:@"event"]){
+            NSString *eventStr = [tempdic objectForKey:@"event"];
+            //把dic 中的空格都去除
+            [newDic setObject:tempdic forKey:eventStr];
         }
     }
     NSString *json = [self convertToJsonData: newDic];
@@ -34,9 +44,9 @@
     NSData *jsonData2 = [NSJSONSerialization dataWithJSONObject:newDic options:NSJSONWritingPrettyPrinted error:&error];
     if(!error){
         //生成json 写到桌面
-        [jsonData2 writeToFile:@"/Users/simple/Desktop/test.json" atomically:YES];
+        [jsonData2 writeToFile:@"/Users/simple/Desktop/appEvent.json" atomically:YES];
         //生成plist 写到桌面
-        [@[newDic] writeToFile:@"/Users/simple/Desktop/appEvent.plist" atomically:YES];
+        [newDic writeToFile:@"/Users/simple/Desktop/appEvent.plist" atomically:YES];
         
     }
     

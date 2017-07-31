@@ -1,6 +1,3 @@
  [
   {"name":"默认登录_验证码","event":"Default_Login_CheckBut"},
-  {"name":"详情页_大图_收藏","event":"HotelDetail_Image_Favorite","scoreParams":"10018","serviceType":"1"},
-  {"name":"详情页_菜单_收藏","event":"HotelDetail_Menu_Favorite","scoreParams":"10018","serviceType":"1"},
-  {"name":"酒店详情_收藏","event":"HotelDetail_Favorite","scoreParams":"10018","serviceType":"1"},
 ]
